@@ -4,8 +4,8 @@
 ## Project Workflows
 
 - constants
-- config_enity
-- artifact_enity
+- config_entity
+- artifact_entity
 - components
 - pipeline
 - app.py
