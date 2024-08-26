@@ -11,27 +11,6 @@ from SA_hate.entity.artifact_entity import DataIngestionArtifacts
 class DataIngestion:
     def __init__(self, data_ingestion_config : DataIngestionConfig):
         self.data_ingestion_config = data_ingestion_config
-    #     self.ZIP_FILE_NAME = ZIP_FILE_NAME
-    #     self.DATA_INGESTION_ARTIFACTS_DIR: str = os.path.join(os.getcwd(), ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR)
-    #     self.DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_IMBALANCE_DATA_DIR)
-    #     self.NEW_DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_RAW_DATA_DIR)
-    #     self.ZIP_FILE_DIR = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR)
-    #     self.ZIP_FILE_PATH = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, self.ZIP_FILE_NAME)
-
-# ARTIFACTS_DIR = os.path.join("artifacts", TIMESTAMP)
-# BUCKET_NAME = 'hate_speech'
-# GIT_REPO_URL = 'https://github.com/SvetSimova/nlp_sensitive_classification_hate'
-# GIT_BRANCH = "main"  # Specify the branch, e.g., 'main', 'master', or any other branch name
-# GIT_ZIPFILE_PATH = "data/download/dataset.zip"  # Path to the file in the repo
-# GIT_RAW_URL = f"https://raw.githubusercontent.com/{github_repo_url.split('/')[-2]}/{github_repo_url.split('/')[-1]}/{branch}/{filename}"
-# ZIP_FILE_NAME = 'dataset.zip'
-# LABEL = "label"
-# TWEET = "tweet"
-
-# # Data ingestion constants
-# DATA_INGESTION_ARTIFACTS_DIR = "DataIngestionArtifacts"
-# DATA_INGESTION_IMBALANCE_DATA_DIR = "imbalanced_data.csv"
-# DATA_INGESTION_RAW_DATA_DIR = "raw_data.csv"
 
     def get_data(self) -> None:
         logging.info("Start get_data method of DataIngestion class")
