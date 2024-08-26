@@ -28,3 +28,7 @@ pip install -r requirements.txt
 ```bash
 python app.py
 ```
+
+## Before
+
+Change in constants/__init__.py GIT_REPO_URL to your git repo name.
