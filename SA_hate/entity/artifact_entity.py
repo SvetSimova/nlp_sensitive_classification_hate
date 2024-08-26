@@ -14,8 +14,8 @@ class DataTransformationArtifacts:
 
 @dataclass
 class ModelTrainerArtifacts: 
-    trained_model_path:str
-    x_test_path: list
+    trained_model_path: str
+    X_test_path: list
     y_test_path: list
 
 
