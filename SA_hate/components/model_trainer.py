@@ -49,9 +49,9 @@ class ModelTrainer:
             tokenizer = Tokenizer(num_words=self.model_trainer_config.MAX_WORDS)
             tokenizer.fit_on_texts(X_train)
             sequences = tokenizer.texts_to_sequences(X_train)
-            logging.info(f"Converting text to sequences: {sequences}")
+            #logging.info(f"Converting text to sequences: {sequences}")
             sequences_matrix = pad_sequences(sequences, maxlen=self.model_trainer_config.MAX_LEN)
-            logging.info(f"The sequence matrix is: {sequences_matrix}")
+            #logging.info(f"The sequence matrix is: {sequences_matrix}")
             return sequences_matrix, tokenizer
         except Exception as e:
             raise CustomException(e, sys) from e
@@ -69,7 +69,7 @@ class ModelTrainer:
         try:
             logging.info("Entered the initiate_model_trainer function ")
             X_train, X_test, y_train, y_test = self.spliting_data(csv_path=self.data_transformation_artifacts.transformed_data_path)
-            model_architecture = ModelArchitecture()   
+            model_architecture = ModelArchitecture()
             model = model_architecture.get_model()
 
             logging.info(f"X_train size is : {X_train.shape}")
@@ -93,6 +93,7 @@ class ModelTrainer:
 
             logging.info("Saving the model")
             model.save(self.model_trainer_config.TRAINED_MODEL_PATH)
+            model.save("start_model.h5")
  
             X_train.to_csv(self.model_trainer_config.X_TRAIN_DATA_PATH)
             X_test.to_csv(self.model_trainer_config.X_TEST_DATA_PATH)

@@ -68,7 +68,7 @@ class DataTransformation:
 
     def concat_data_cleaning(self, words):
         try:
-            logging.info("Entered into the concat_data_cleaning function")
+            #logging.info("Entered into the concat_data_cleaning function")
             stemmer = nltk.SnowballStemmer("english")
             stopword = set(stopwords.words('english'))
             words = str(words).lower()
@@ -82,7 +82,7 @@ class DataTransformation:
             words= " ".join(words)
             words = [stemmer.stem(word) for word in words.split(' ')]
             words= " ".join(words)
-            logging.info("Exited the concat_data_cleaning function")
+            #logging.info("Exited the concat_data_cleaning function")
             return words 
 
         except Exception as e:

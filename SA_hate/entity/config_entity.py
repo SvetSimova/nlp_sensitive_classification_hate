@@ -6,7 +6,7 @@ import os
 class DataIngestionConfig:
     def __init__(self):
         #self.BUCKET_NAME = BUCKET_NAME
-        self.GIT_DATA_URL = GIT_RAW_URL
+        self.GIT_DATA_URL = GIT_RAW_URL_DATA
         self.ZIP_FILE_NAME = ZIP_FILE_NAME
         self.DATA_INGESTION_ARTIFACTS_DIR: str = os.path.join(os.getcwd(), ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR)
         self.DATA_ARTIFACTS_DIR: str = os.path.join(self.DATA_INGESTION_ARTIFACTS_DIR, DATA_INGESTION_IMBALANCE_DATA_DIR)
@@ -56,10 +56,11 @@ class ModelTrainerConfig:
 @dataclass
 class ModelEvaluationConfig: 
     def __init__(self):
+        self.GIT_MODEL_URL = GIT_RAW_URL_MODEL
         self.MODEL_EVALUATION_MODEL_DIR: str = os.path.join(os.getcwd(), ARTIFACTS_DIR, MODEL_EVALUATION_ARTIFACTS_DIR)
         self.BEST_MODEL_DIR_PATH: str = os.path.join(self.MODEL_EVALUATION_MODEL_DIR, BEST_MODEL_DIR)
+        self.MODEL_NAME = MODEL_NAME
         #self.BUCKET_NAME = BUCKET_NAME 
-        self.MODEL_NAME = MODEL_NAME 
 
 
 
