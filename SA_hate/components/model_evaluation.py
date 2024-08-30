@@ -1,9 +1,6 @@
-
 import os
 import sys
-import keras
 import pickle
-import numpy as np
 import pandas as pd
 from SA_hate.logger import logging
 from SA_hate.exception import CustomException
@@ -14,7 +11,6 @@ from sklearn.metrics import confusion_matrix
 from SA_hate.entity.config_entity import ModelEvaluationConfig
 from SA_hate.entity.artifact_entity import ModelEvaluationArtifacts, ModelTrainerArtifacts, DataTransformationArtifacts
 #from SA_hate.configuration.gcloud_syncer import GCloudSync
-import requests
 
 
 class ModelEvaluation:
@@ -40,20 +36,20 @@ class ModelEvaluation:
         """
         try:
             logging.info("Entered the get_best_model_from_storage method of Model Evaluation class")
-            best_model_path = os.path.join(self.model_evaluation_config.BEST_MODEL_DIR_PATH, 
-                                               self.model_evaluation_config.MODEL_NAME)
-            response = requests.get(self.model_evaluation_config.GIT_MODEL_URL)
-            # Check if the request was successful
-            if response.status_code == 200:
-                # Create the destination directory if it doesn't exist
-                os.makedirs(self.model_evaluation_config.BEST_MODEL_DIR_PATH, exist_ok=True)
+            
+            # BEST_MODEL_DIR_PATH = os.path.join(self.MODEL_EVALUATION_MODEL_DIR, BEST_MODEL_DIR)
+            # MODEL_EVALUATION_MODEL_DIR: str = os.path.join(os.getcwd(), ARTIFACTS_DIR, MODEL_EVALUATION_ARTIFACTS_DIR)
+            # result: BEST_MODEL_DIR_PATH = "artifacts/timestamp/ModelEvaluationArtifacts/best_model"
+            os.makedirs(self.model_evaluation_config.BEST_MODEL_DIR_PATH, exist_ok=True)
 
-                with open(best_model_path, 'wb') as file:
-                    file.write(response.content)
-                
-                print(f"File downloaded successfully to {best_model_path}")
+            # from {PROJECT_NAME}/best_model/model.h5
+            best_model_path = os.path.join(os.getcwd(), BEST_MODEL_PATH, MODEL_NAME)
+            
+            #if os.path.isfile(best_model_path) is False:
+            if os.path.isfile(best_model_path):
+                print(f"The best model exists !")
             else:
-                print(f"Failed to download the file. Status code: {response.status_code}")
+                print(f"The best model does not exist yet.")
                 
             logging.info("Exited the get_best_model_from_storage method of Model Evaluation class")
             return best_model_path
@@ -61,7 +57,6 @@ class ModelEvaluation:
             raise CustomException(e, sys) from e 
         
 
-    
     def our_evaluate(self, model, tokenizer):
         """
         Params:
@@ -102,6 +97,7 @@ class ModelEvaluation:
                     res.append(1)
  
             print(confusion_matrix(y_test, res))
+            print(f"Accuracy is {accuracy}")
             logging.info(f"Confusion_matrix is: {confusion_matrix(y_test, res)} ")
             return accuracy
         except Exception as e:
@@ -125,6 +121,7 @@ class ModelEvaluation:
                 load_tokenizer = pickle.load(handle)
 
             trained_model_accuracy = self.our_evaluate(trained_model, load_tokenizer)
+            print(f"The trained_model accuracy is {trained_model_accuracy}")
 
             logging.info("Fetch the best model from the storage")
             best_model_path = self.get_best_model_from_storage()
@@ -137,13 +134,14 @@ class ModelEvaluation:
                 logging.info("Load best model fetched from the storage")
                 best_model = load_model(best_model_path)
                 best_model_accuracy = self.our_evaluate(best_model, load_tokenizer)
+                print(f"The best_model accuracy is {best_model_accuracy}")
 
                 logging.info("Comparing loss between best_model_loss and trained_model_loss ? ")
-                if best_model_accuracy > trained_model_accuracy:
-                    is_model_accepted = True
+                if best_model_accuracy[1] > trained_model_accuracy[1]:
+                    is_model_accepted = False
                     logging.info("Trained model not accepted")
                 else:
-                    is_model_accepted = False
+                    is_model_accepted = True
                     logging.info("Trained model accepted")
 
             model_evaluation_artifacts = ModelEvaluationArtifacts(is_model_accepted=is_model_accepted)

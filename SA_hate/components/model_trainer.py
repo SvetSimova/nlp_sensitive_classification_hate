@@ -10,7 +10,7 @@ from keras.preprocessing.text import Tokenizer
 from keras.utils import pad_sequences
 from SA_hate.entity.config_entity import ModelTrainerConfig
 from SA_hate.entity.artifact_entity import ModelTrainerArtifacts, DataTransformationArtifacts
-from SA_hate.ml.model import ModelArchitecture
+from SA_hate.ml.model_arch import ModelArchitecture
 
 
 

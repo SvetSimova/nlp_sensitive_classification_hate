@@ -29,6 +29,7 @@ list_of_files = [
     f"{project_name}/pipeline/prediction_pipeline.py",
     f"{project_name}/ml/__init__.py",
     f"{project_name}/ml/model.py",
+    f"{project_name}/best_model/__init__.py",
     "app.py",
     "demo.py",
     "Dockerfile",

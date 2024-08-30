@@ -26,4 +26,5 @@ class ModelEvaluationArtifacts:
 
 @dataclass
 class ModelPusherArtifacts:
-    bucket_name: str
+    #bucket_name: str
+    best_model: str

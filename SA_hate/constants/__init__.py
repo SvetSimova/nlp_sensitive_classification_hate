@@ -5,6 +5,7 @@ from datetime import datetime
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 ARTIFACTS_DIR = os.path.join("artifacts", TIMESTAMP)
 #BUCKET_NAME = 'hate_speech'
+PROJECT_NAME = 'SA_hate'
 GIT_REPO_URL = 'https://github.com/SvetSimova/nlp_sensitive_classification_hate'
 GIT_BRANCH = "main"  # Specify the branch, e.g., 'main', 'master', or any other branch name
 GIT_ZIPFILE_PATH = "data/download/dataset.zip"  # Path to the file in the repo
@@ -59,7 +60,7 @@ BEST_MODEL_DIR = "best_model"
 MODEL_EVALUATION_FILE_NAME = 'loss.csv'
 MODEL_NAME = 'model.h5'
 GIT_RAW_URL_MODEL = f"https://raw.githubusercontent.com/{GIT_REPO_URL.split('/')[-2]}/{GIT_REPO_URL.split('/')[-1]}/{GIT_BRANCH}/{BEST_MODEL_DIR}/{MODEL_NAME}"
-
+BEST_MODEL_PATH = os.path.join(PROJECT_NAME, BEST_MODEL_DIR)
 
 APP_HOST = "0.0.0.0"
 APP_PORT = 8080
