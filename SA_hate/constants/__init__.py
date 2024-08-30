@@ -62,5 +62,5 @@ MODEL_NAME = 'model.h5'
 GIT_RAW_URL_MODEL = f"https://raw.githubusercontent.com/{GIT_REPO_URL.split('/')[-2]}/{GIT_REPO_URL.split('/')[-1]}/{GIT_BRANCH}/{BEST_MODEL_DIR}/{MODEL_NAME}"
 BEST_MODEL_PATH = os.path.join(PROJECT_NAME, BEST_MODEL_DIR)
 
-APP_HOST = "0.0.0.0"
+APP_HOST = "localhost" #"0.0.0.0"
 APP_PORT = 8080

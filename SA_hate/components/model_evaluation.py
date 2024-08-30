@@ -47,8 +47,10 @@ class ModelEvaluation:
             
             #if os.path.isfile(best_model_path) is False:
             if os.path.isfile(best_model_path):
+                logging.info("The best model exists!")
                 print(f"The best model exists !")
             else:
+                logging.info("The best model does not exist yet.")
                 print(f"The best model does not exist yet.")
                 
             logging.info("Exited the get_best_model_from_storage method of Model Evaluation class")
